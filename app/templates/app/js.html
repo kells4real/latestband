@@ -1,0 +1,43 @@
+{% load static %}
+
+<!-- Bootstrap and necessary plugins -->
+{% if active != "calendar" %}
+<script src="{% static 'app/dist/vendors/js/jquery.min.js' %}"></script>
+{% endif %}
+<script src="{% static 'app/dist/vendors/js/popper.min.js' %}"></script>
+<script src="{% static 'app/dist/vendors/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'app/dist/vendors/js/pace.min.js' %}"></script>
+
+<!-- Plugins and scripts required by all views -->
+<!--Chart JS is commented out due to console errors-->
+<!--<script src="{% static 'app/dist/vendors/js/Chart.min.js' %}"></script>-->
+
+<!-- CoreUI main scripts -->
+
+<script src="{% static 'app/dist/js/app.js' %}"></script>
+
+<!-- Plugins and scripts required by this views -->
+
+<!-- Custom scripts required by this view -->
+<script src="{% static 'app/dist/js/views/main.js' %}"></script>
+<script src="{% static 'app/custom.js' %}"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/5f7e0e574704467e89f587c9/default';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+
+{% load tz_detect %}
+{% tz_detect %}
+{% block script %}
+
+{% endblock %}

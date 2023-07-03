@@ -1,0 +1,102 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.centered {
+    text-align: center;
+}
+
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i>Last 25 Transactions</div>
+            <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                    <thead>
+                        <tr>
+
+                            <th class="centered">Amount</th>
+                            <th class="centered">Type</th>
+                            <th class="centered">Name</th>
+                            <th class="centered">Account No</th>
+                            <th class="centered">Bank</th>
+                            <th class="centered">Date</th>
+                            <th class="centered">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                            <tr>
+                                <td class="centered">${{ deposit.amount }}</td>
+                              <td class="centered">{% if deposit.receiver != user.username %} <span style="color: red">Debit</span>
+                                {% else %} <span style="color: green">Credit</span>{% endif %} </td>
+                            <td class="centered">{{ deposit.name }}</td>
+
+                                <td class="centered">{{ deposit.receiver }}</td>
+                            <td class="centered">{{ deposit.bank }}</td>
+                                <td class="centered">{{ deposit.date }} {% if deposit.admin_confirmed %}| {{ deposit.confirmed_date }} {% endif %}</td>
+                                <td class="centered">
+
+
+                                    {% if deposit.confirmed%}
+                                   <button class="btn btn-sm btn-{% if deposit.receiver != user.username %}info{% else %}success{% endif %}">
+                                         <span class="fa fa-"></span>Completed</button>
+                                        {% else %}
+                                        <button class="btn btn-sm btn-warning">
+                                         <span class="fa fa-"></span>Processing</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="text-align: center">
+    <div class="col-md-12">
+        {% if deposits.has_other_pages %}
+            <ul class="pagination">
+                {% if deposits.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{deposits.previous_page_number}}" class="page-link">Prev</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">Prev</a>
+                    </li>
+                {% endif %}
+                {% for i in deposits.paginator.page_range %}
+                    {% if deposits.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if deposits.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{deposits.next_page_number}}" class="page-link">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

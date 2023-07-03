@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="card">
+    <div class="card-header">
+        <h2>Make a Transfer</h2>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+                 <div class="form-row">
+                                         <div class="form-group col-md-4 mb-0">
+
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.receiver|as_crispy_field }}
+                    </div>
+               </div>
+             <div class="form-row">
+                                <div class="form-group col-md-4 mb-0">
+
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+               </div>
+                 <div class="form-row">
+                                    <div class="form-group col-md-4 mb-0">
+
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ form.bank|as_crispy_field }}
+                    </div>
+               </div>
+
+                <div class="form-row">
+                                   <div class="form-group col-md-4 mb-0">
+
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.route|as_crispy_field }}
+                    </div>
+               </div>
+
+               <div class="form-row">
+                                  <div class="form-group col-md-4 mb-0">
+
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{ form.amount|as_crispy_field }}
+                    </div>
+               </div>
+
+<br>
+            <div style="text-align: center">
+        <button type="submit" class="btn btn-primary">Transfer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

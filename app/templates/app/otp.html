@@ -1,0 +1,79 @@
+{% extends 'app/base2.html' %}
+{% load static %}
+{% block content %}
+
+<!--===============================================================================================-->
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'landing/css/main.css' %}">
+<!--===============================================================================================-->
+
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static 'app/dist/img/WG.png' %}" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" action="{% url 'otp' %}" method="post">
+                    {% csrf_token %}
+
+					<span class="login100-form-title">
+					Enter the OTP code sent to the email address associated with this account.
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter OTP Code">
+						<input class="input100" type="text" name="code" placeholder="OTP">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-account" aria-hidden="true"></i>
+						</span>
+					</div>
+                <div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Submit
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'landing/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'landing/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'landing/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'landing/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'landing/vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'landing/js/main.js' %}"></script>
+
+{% endblock %}

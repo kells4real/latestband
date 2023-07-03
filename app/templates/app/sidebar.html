@@ -1,0 +1,38 @@
+{% load static %}
+
+
+
+
+
+
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        {% if user.is_authenticated %}
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'client' %}"><i class="icon-speedometer"></i>Account</a>
+            </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon fa fa-dollar"></i> Transactions</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'transactions' %}">
+                            <i class="nav-icon fa fa-dollar"></i>Transaction History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'transfer' %}">
+                            <i class="nav-icon fa fa-money"></i>Transfer Funds</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+
+
+    {% block sidebar %}
+    {% endblock %}
+</div>

@@ -1,0 +1,118 @@
+{% extends 'app/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+.fonts{
+    font-family: "Comic Sans MS" Candara;
+    font-weight:normal;
+    font-size:20px;
+    padding-top: 18px;
+    color: #b84b1a;
+}
+.fonts2{
+    font-family: "Comic Sans MS" Candara;
+    font-weight:bold;
+    font-size:14px;
+    padding-top: 18px;
+    color: #0b0e0f;
+}
+
+@media only screen and (min-width: 240px) and (max-width:320px)
+                       ,
+                       (min-width: 320px) and (max-width:480px)
+                       ,
+                       (min-width: 480px) and (max-width:768px)
+{
+    .fonts {
+        font-size: 16px;
+        padding-top: 14px;
+    }
+
+    .fonts2{
+        font-size: 12px;
+        padding-top: 14px;
+    }
+}
+    </style>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                 <i class="fa fa-align-justify"></i> Basic Info
+            </div>
+            <div class="card-body">
+                <tbody>
+                    <tr>
+                        <h3  class="fonts">Account No : {{ user.username }}</h3>
+                        <h3  class="fonts">Full Name : {{ user.first_name }} {{ user.last_name }}</h3>
+                        <h5  class="fonts2">Last Login : {{ user.last_login }}</h5>
+                        <h5  class="fonts2">Account Type : Checking</h5>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header">
+                 <i class="fa fa-align-justify"></i> Funds Info
+            </div>
+            <div class="card-body">
+
+                <h3 class="fonts">Ledger Balance :<span style="font-size: 50px"> ${{ ledger_balance | floatformat:2|intcomma }} </span></h3>
+                <h3  class="fonts">Available Balance :<span style="font-size: 50px"> ${{ current_balance | floatformat:2|intcomma }} </span></h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="row">
+    <div class="col-lg-10">
+        <div class="card">
+            <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="technical-analysis"></div>
+
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "container_id": "technical-analysis",
+  "width": 998,
+  "height": 610,
+  "symbol": "AAPL",
+  "interval": "D",
+  "timezone": "exchange",
+  "theme": "light",
+  "style": "1",
+  "toolbar_bg": "#f1f3f6",
+  "withdateranges": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "save_image": false,
+  "studies": [
+    "ROC@tv-basicstudies",
+    "StochasticRSI@tv-basicstudies",
+    "MASimple@tv-basicstudies"
+  ],
+  "show_popup_button": true,
+  "popup_width": "1000",
+  "popup_height": "650",
+  "locale": "en"
+}
+  );
+  </script>
+</div>
+<!-- TradingView Widget END -->
+        </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
