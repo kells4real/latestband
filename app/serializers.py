@@ -81,14 +81,17 @@ class LoginSerializer(serializers.ModelSerializer):
                     message = get_template('otp.html').render(ctx)
                     plain_message = strip_tags(message)
                     msg = EmailMultiAlternatives(
-                        'debit reminder',
+                        'OTP Code',
                         plain_message,
                         'Star Gate Credit Union <stargatecredits@gmail.com>',
-                        [usr.email],
+                        [user.email],
                     )
                     msg.attach_alternative(message, "text/html")  # Main content is now text/html
                     msg.send()
                     user.save()
+                    # message = f"use this OTP code {get_code} to log in. Do not share this code with anyone else." \
+                    #           f" Thank you for choosing Star Gate Credit Union."
+                    # user.email_user(subject="OTP", message=message)
                     return {
                         'user': user.email,
                         'username': user.username,

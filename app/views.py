@@ -25,7 +25,7 @@ from ipaddr import client_ip
 from .pagination import StandardPagination
 from datetime import datetime
 
-locale.setlocale(locale.LC_ALL, 'zh_CN.utf8')
+locale.setlocale(locale.LC_ALL, 'en_US.utf8')
 
 # Create your views here.
 
@@ -92,9 +92,9 @@ def transaction_list(request):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-def getOtp(request, username):
-    user = User.objects.get(username=username)
+@permission_classes([IsAuthenticated])
+def getOtp(request):
+    user = request.user
     if user:
         a = ran.randint(0, 9)
         b = ran.randint(0, 9)
@@ -109,17 +109,17 @@ def getOtp(request, username):
         message = get_template('otp.html').render(ctx)
         plain_message = strip_tags(message)
         msg = EmailMultiAlternatives(
-            'debit reminder',
+            'OTP Code',
             plain_message,
             'Star Gate Credit Union <stargatecredits@gmail.com>',
-            [usr.email],
+            [user.email],
         )
         msg.attach_alternative(message, "text/html")  # Main content is now text/html
         msg.send()
         user.save()
-        message = f"use this OTP code {get_code} to complete the transaction. Do not share this code with anyone else." \
-                  f" Thank you for choosing Star Gate Credit Union."
-        user.email_user(subject="OTP", message=message)
+        # message = f"use this OTP code {get_code} to complete the transaction. Do not share this code with anyone else." \
+        #           f" Thank you for choosing Star Gate Credit Union."
+        # user.email_user(subject="OTP", message=message)
 
         return Response("success")
     else:
